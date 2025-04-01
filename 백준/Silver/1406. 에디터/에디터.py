@@ -1,5 +1,3 @@
-import sys
-
 class Editor:
     def __init__(self, a):
         self.left = list(a)
@@ -7,7 +5,7 @@ class Editor:
         
     def P(self, x):
         self.left.append(x)
-
+        
     def L(self):
         if self.left:
             self.right.append(self.left.pop())
@@ -21,21 +19,21 @@ class Editor:
             self.left.pop()
 
     def R(self):
-        return "".join(self.left + self.right[::-1])
+        return self.left + self.right[::-1]
 
-a = sys.stdin.readline().strip()
+
+a = input()
 editor = Editor(a)
-n = int(sys.stdin.readline().strip())
-
+n = int(input())
 for _ in range(n):
-    t = sys.stdin.readline().strip()
-    if t.startswith('P'):
+    t = input()
+    if t[:1] == 'P':
         editor.P(t[2:])
-    elif t == 'L':
+    elif t[:1] == 'L':
         editor.L()
-    elif t == 'D':
+    elif t[:1] == 'D':
         editor.D()
-    elif t == 'B':
+    elif t[:1] == 'B':
         editor.B()
-
-sys.stdout.write(editor.R() + "\n")
+        
+print(*editor.R(),sep="")
